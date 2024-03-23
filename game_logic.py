@@ -14,12 +14,12 @@ generate_team(job_hunters)
 print("INTRODUCING THE HOME TEAM: THE SYSTEM!\n")
 for i in the_system:
     print(i.name)
-    time.sleep(1)
+    time.sleep(.5)
 
 print("\nINTRODUCING THE AWAY TEAM: THE JOB HUNTERS!\n")
 for i in job_hunters:
     print(i.name)
-    time.sleep(1)
+    time.sleep(.5)
 
 # Game Logic
 home = the_system
@@ -32,7 +32,7 @@ def play_game():
     inning = 1
 
     print("\nPLAY BALL!\n")
-    for i in range(0, 8):
+    for i in range(0, 9):
         print("INNING:", inning, "\n")
         play_inning()
         inning += 1
@@ -109,5 +109,3 @@ def at_bat(i):
                 return "Out"
             else:
                 print("STRIKE", str(strikes) + "!")
-
-play_game()
