@@ -3,13 +3,14 @@
 '''
 TO DO:
 Extra innings in case of tie
+Resume batting order where it left off
+Get change sides message to display once per loop instead of twice
 Player classes/stats
 
 Stretch goals:
 Add more teams
 Season/Post Season
-Website? 
-Data API
+Website: {Accounts with authentication, favorite teams, Data from previous seasons}
 '''
 
 # Imports

@@ -23,9 +23,9 @@ def get_name():
 # Generate Player Stats
 def get_stats():
   player_stats = {"Pitching": 0, "Defense": 0, "Hitting": 0}
-  pitching = random(1, 5)
-  defense = random(1, 5)
-  hitting = random(1, 5)
+  pitching = random(1, 6)
+  defense = random(1, 6)
+  hitting = random(1, 6)
   player_stats["Pitching"] = pitching
   player_stats["Defense"] = defense
   player_stats["Hitting"] = hitting
