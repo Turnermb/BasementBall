@@ -2,7 +2,7 @@ import requests
 from random import randrange as random
 import json
 
-def get_name():
+def get_name(): # Gets random player name from random name API
     response = requests.get("https://randomuser.me/api/")
     response = response.json()
     json_string = json.dumps(response)
@@ -11,12 +11,6 @@ def get_name():
     name = json_dict['results'][0]['name']['first'] + " " + json_dict['results'][0]['name']['last']
     return name
 
-# Teams
-job_hunters = []
-the_system = []
-
-# Players
-  
 # Player Classes
 class Player:
   def __init__(self, name, position, stats):
@@ -36,7 +30,6 @@ def stat_generator():
 
   return player_stats
 
-
 # Generate Teams Of Player Objects
 def generate_team(team):
   for i in range(0, 9): #Creates 9 Player Objects With Random Stats Assigns Them To The Specified Team.
@@ -44,8 +37,3 @@ def generate_team(team):
     player = Player(name, "Outfield", stat_generator())
     team.append(player)
 
-
-generate_team(job_hunters)
-
-for i in job_hunters:
-  print(i.name, i.stats)
