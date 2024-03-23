@@ -3,6 +3,14 @@
 
 from random import randrange as random
 import time
+import requests
+import json
+
+
+response = requests.get("https://randomuser.me/api/")
+print(response.json())
+
+
 
 
 # Teams
@@ -33,7 +41,7 @@ def stat_generator():
 # Generate Teams Of Player Objects
 def generate_teams():
   for i in range(0, 18): #Creates 18 Player Objects With Random Stats And Separates Them Into Two Teams
-    player = Player("Player" + str(i+1), "Outfield", stat_generator())
+    player = Player("John", "Outfield", stat_generator())
     if len(job_hunters) < 9:
       job_hunters.append(player)
     elif len(job_hunters) >= 9:
@@ -63,6 +71,8 @@ def play_inning(): # Plays one inning of baseball
   outs = 0
   hits = 0
   i = 0
+
+  print(score, "\n")
   print("NOW PITCHING: ", str(the_system[0].name), " ", str(the_system[0].stats), "\n")
   # Home At Bat
   while outs < 3:
@@ -78,7 +88,6 @@ def play_inning(): # Plays one inning of baseball
     i += 1
     if i >= 9:
       i = 0
-  print(score, "\n")
 
   print("CHANGE SIDES!\n")
   time.sleep(3)
