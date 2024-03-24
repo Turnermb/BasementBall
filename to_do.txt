@@ -15,12 +15,13 @@ Add foul balls (implemented).
 
 Improve offense and defense:
     Add bases and base runners (implemented).
-    Add chance of doubles/triples/home run on hit. Possibly tied to hitting stat?
+    Add chance of doubles/triples/home run on hit (implemented). 
     Add bases loaded/grand slam flourishes. Sound bytes?
     Add double/triple plays for defenders.
     Add stealing bases for base runners.
 
 Figure out if there's a way to exclude non-latin characters from name API call (implemented).
+Move team generation into teams.py. 
 Start batting order on next person in list.
 
 Add more teams:
