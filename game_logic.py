@@ -13,12 +13,12 @@ generate_team(job_hunters)
 # Introduces the players on each team.
 print("INTRODUCING THE HOME TEAM: THE SYSTEM!\n")
 for i in the_system:
-    print(i.name)
+    print(i.name.upper())
     time.sleep(.5)
 
 print("\nINTRODUCING THE AWAY TEAM: THE JOB HUNTERS!\n")
 for i in job_hunters:
-    print(i.name)
+    print(i.name.upper())
     time.sleep(.5)
 
 # Game Logic
@@ -69,7 +69,7 @@ def play_inning():  # Plays one at bat for both home and away teams.
             pitching = away
             i = home_batter # Sets i to the value of the last home batter's index, default 0.
 
-        print("NOW PITCHING:", str(pitching[0].name), str(pitching[0].stats), "\n")
+        print("NOW PITCHING:", str(pitching[0].name.upper()), str(pitching[0].stats), "\n")
         while outs < 3: # While outs less than 3 if the result of the at bat was hit, numbers greater than 3 result in a run. Otherwise it's an out.
             time.sleep(1.5)
             if at_bat(i) == "Hit":
@@ -105,15 +105,27 @@ def at_bat(i):
     strikes = 0
     fielder = 0
 
-    print("NOW HITTING:", str(hitting[i].name), str(hitting[i].stats))
+    print("NOW HITTING:", str(hitting[i].name.upper()), str(hitting[i].stats))
 
     while out == False and hit == False:  # At bat loop that ends either with an out or a hit
+        # Generates offense and defense numbers.
+        offense = (hitting[i].stats["Hitting"] * 5) + random(1, 101)
+        defense = (pitching[fielder].stats["Defense"] * 5) + random(1, 101)
+        # Offense number minus pitching skill deduction.
+        pitch_deducted = (offense - (pitching[0].stats["Pitching"] * 3))
         time.sleep(1)
-        if (hitting[i].stats["Hitting"] * 5) - (pitching[0].stats["Pitching"] * 3) + random(1, 101) > 75:
-            fielder = random(0, 9)
-            if (pitching[fielder].stats["Defense"] * 3) + random(1, 101) > 75:
+        # If offense number > 75 but is < 75 when pitching is deducted results in a foul ball.
+        if offense >= 75 and pitch_deducted < 75: 
+            print("FOUL BALL")
+            time.sleep(0.5)
+            if strikes < 2: # Cannot strike out on foul balls.
+                strikes += 1
+        elif pitch_deducted > 75:
+            fielder = random(0, 9) # Randomly decides which fielder will be selected to defend.
+            # If defense > offense a catch is made for an out. Otherwise results in a hit.
+            if defense > offense:
                 time.sleep(1)
-                print("CAUGHT IN THE OUTFIELD BY", pitching[fielder].name)
+                print("CAUGHT IN THE OUTFIELD BY", pitching[fielder].name.upper())
                 out = True
                 time.sleep(0.5)
                 return "Out"
