@@ -1,0 +1,23 @@
+TO DO:
+Move game logic into module and get game working (implemented).
+Refactor at bats into one function using top(away) and bottom(home) of inning (implemented).
+Extra innings in case of tie (implemented). 
+Get change sides message to display once per loop instead of twice (implemented).
+
+Player classes/stats: 
+    Hitting increases chance to hit a pitch by 5% per level (implemented). 
+    Pitching reduces a chance to hit a pitch by 3% per level (implemented).
+    Defense increases a chance of catching the ball for an out by 3% per level (implemented).
+    Split Player class into Pitcher/Outfield classes. Outfielders have no need for a pitching stat (implemented).
+    Retool team generation to make one pitcher and 8 outfielders (implemented).
+
+Add bases and base runners.
+Add chance of doubles/triples/home run on hit. Possibly tied to hitting stat?
+Start batting order on next person in list.
+Add more teams
+Season/Post Season
+
+Website: 
+    Accounts with authentication,
+    favorite teams,
+    Data from previous seasons
