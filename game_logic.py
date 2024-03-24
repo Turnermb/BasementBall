@@ -112,6 +112,7 @@ def at_bat(i):
         if (hitting[i].stats["Hitting"] * 5) - (pitching[0].stats["Pitching"] * 3) + random(1, 101) > 75:
             fielder = random(0, 9)
             if (pitching[fielder].stats["Defense"] * 3) + random(1, 101) > 75:
+                time.sleep(1)
                 print("CAUGHT IN THE OUTFIELD BY", pitching[fielder].name)
                 out = True
                 time.sleep(0.5)
