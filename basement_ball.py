@@ -2,9 +2,7 @@
 
 '''
 TO DO:
-Extra innings in case of tie
-Resume batting order where it left off
-Get change sides message to display once per loop instead of twice
+Start batting order on next person in list.
 Player classes/stats
 
 Stretch goals:

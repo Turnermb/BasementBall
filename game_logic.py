@@ -26,6 +26,8 @@ home = the_system
 away = job_hunters
 hitting = ""
 pitching = ""
+home_batter = 0
+away_batter = 0
 score = { "THE SYSTEM": 0, "THE JOB HUNTERS": 0}
 
 def play_game():
@@ -36,7 +38,12 @@ def play_game():
         print("INNING:", inning, "\n")
         play_inning()
         inning += 1
-
+    if score["THE SYSTEM"] == score["THE JOB HUNTERS"]: # If score is tied at the end of the game, play innings until there's no longer a tie.
+        print("EXTRA INNINGS!")
+        while score["THE SYSTEM"] == score["THE JOB HUNTERS"]:
+            print("INNING:", inning, "\n")
+            play_inning()
+            inning += 1
     print("THAT'S THE GAME!")
     print(score)
 
@@ -44,23 +51,26 @@ def play_game():
 def play_inning():  # Plays one at bat for both home and away teams.
     global hitting
     global pitching
+    global home_batter
+    global away_batter
     toggle = True
     outs = 0
     hits = 0
-    i = 0
 
     print(score, "\n")
     for i in range(0, 2):
         if toggle == True: # If toggle = True away team on offense. If False, home team on offense.
             hitting = away
             pitching = home
-        else:
+            i = away_batter # Sets i to the value of the last away batter's index, default 0.
+            
+        elif toggle == False:
             hitting = home
             pitching = away
+            i = home_batter # Sets i to the value of the last home batter's index, default 0.
 
         print("NOW PITCHING:", str(pitching[0].name), str(pitching[0].stats), "\n")
-
-        while outs < 3:
+        while outs < 3: # While outs less than 3 if the result of the at bat was hit, numbers greater than 3 result in a run. Otherwise it's an out.
             time.sleep(1.5)
             if at_bat(i) == "Hit":
                 hits += 1
@@ -76,14 +86,17 @@ def play_inning():  # Plays one at bat for both home and away teams.
             i += 1
             if i >= 9:
                 i = 0
+        if toggle == True:
+            away_batter = i # Stores the last away batter's index in a variable
+            print("CHANGE SIDES!\n")
+            time.sleep(3)
+        elif toggle == False:
+            home_batter = i # Stores the last home batter's index in a variable     
         outs = 0
         hits = 0
         i = 0
-        toggle = False # Switches global toggle to False to change teams.
-        
-        print("CHANGE SIDES!\n")
-        time.sleep(3)
-    toggle = True
+        toggle = False # Switches toggle to False to change teams. 
+    toggle = True # Switches toggle back to True for next inning.
 
 # At bat function: Simulates one at bat for hitting team
 def at_bat(i):
