@@ -13,7 +13,8 @@ Player classes/stats:
 
 Add foul balls (implemented).
 
-Add bases and base runners:
+Improve offense and defense:
+    Add bases and base runners (implemented).
     Add chance of doubles/triples/home run on hit. Possibly tied to hitting stat?
     Add bases loaded/grand slam flourishes. Sound bytes?
     Add double/triple plays for defenders.

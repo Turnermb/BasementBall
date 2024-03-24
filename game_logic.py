@@ -54,8 +54,8 @@ def play_inning():  # Plays one at bat for both home and away teams.
     global home_batter
     global away_batter
     toggle = True
+    bases = []
     outs = 0
-    hits = 0
 
     print(score, "\n")
     for i in range(0, 2):
@@ -70,13 +70,14 @@ def play_inning():  # Plays one at bat for both home and away teams.
             i = home_batter # Sets i to the value of the last home batter's index, default 0.
 
         print("NOW PITCHING:", str(pitching[0].name.upper()), str(pitching[0].stats), "\n")
-        while outs < 3: # While outs less than 3 if the result of the at bat was hit, numbers greater than 3 result in a run. Otherwise it's an out.
+        while outs < 3: # While outs < 3, if at bat function returns hit advance bases. Otherwise plus one out.
             time.sleep(1.5)
             if at_bat(i) == "Hit":
-                hits += 1
-                if hits > 3:
+                bases.insert(0, hitting[i].name) # Inserts name of current batter into bases list.
+                if len(bases) != 0 and len(bases) > 3: # If runner advances home, remove name from end of list.
+                    bases.pop()
                     print("A RUN SCORES!")
-                    if hitting == away: 
+                    if hitting == away: # Adds one to score of hitting team.
                         score["THE JOB HUNTERS"] += 1
                     else:
                         score["THE SYSTEM"] += 1
@@ -84,16 +85,16 @@ def play_inning():  # Plays one at bat for both home and away teams.
                 outs += 1
             print("OUTS:", outs, "\n")
             i += 1
-            if i >= 9:
+            if i >= 9: # Returns to the beginning of the batting order after last batter.
                 i = 0
         if toggle == True:
             away_batter = i # Stores the last away batter's index in a variable
             print("CHANGE SIDES!\n")
             time.sleep(3)
         elif toggle == False:
-            home_batter = i # Stores the last home batter's index in a variable     
+            home_batter = i # Stores the last home batter's index in a variable
+        bases = [] # Clears bases, outs and current index.
         outs = 0
-        hits = 0
         i = 0
         toggle = False # Switches toggle to False to change teams. 
     toggle = True # Switches toggle back to True for next inning.
