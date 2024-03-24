@@ -103,16 +103,25 @@ def at_bat(i):
     out = False
     hit = False
     strikes = 0
+    fielder = 0
 
     print("NOW HITTING:", str(hitting[i].name), str(hitting[i].stats))
 
-    while (out == False and hit == False):  # At bat loop that ends either with an out or a hit
+    while out == False and hit == False:  # At bat loop that ends either with an out or a hit
         time.sleep(1)
-        if (hitting[i].stats["Hitting"] * 5) - (pitching[0].stats["Pitching"] * 3) + random(1, 100) > 85:
-            hit = True
-            print("HIT")
-            time.sleep(0.5)
-            return "Hit"
+        if (hitting[i].stats["Hitting"] * 5) - (pitching[0].stats["Pitching"] * 3) + random(1, 101) > 75:
+            fielder = random(0, 9)
+            if (pitching[fielder].stats["Defense"] * 3) + random(1, 101) > 75:
+                time.sleep(1)
+                print("CAUGHT IN THE OUTFIELD BY", pitching[fielder].name)
+                out = True
+                time.sleep(0.5)
+                return "Out"
+            else:
+                hit = True
+                print("HIT")
+                time.sleep(0.5)
+                return "Hit"
         else:
             strikes += 1
             if strikes >= 3:
