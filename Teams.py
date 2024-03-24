@@ -12,7 +12,7 @@ class Player:
 
     # Gets random player name from random name API
   def get_name():
-    response = requests.get("https://randomuser.me/api/")
+    response = requests.get("https://randomuser.me/api/?inc=name,nat&nat=au,br,ca,ch,de,dk,es,fi,fr,gb,ie,in,mx,nl,no,nz,rs,tr,ua,us")
     response = response.json()
     json_string = json.dumps(response)
     json_dict = json.loads(json_string)
@@ -57,15 +57,6 @@ class Outfielder(Player):
     player_stats["Hitting"] = hitting
 
     return player_stats
-  
-def get_name():
-    response = requests.get("https://randomuser.me/api/")
-    response = response.json()
-    json_string = json.dumps(response)
-    json_dict = json.loads(json_string)
-
-    name = json_dict['results'][0]['name']['first'] + " " + json_dict['results'][0]['name']['last']
-    return name
 
 # Generate Player Stats
 def get_stats():
@@ -81,7 +72,7 @@ def get_stats():
 
 # Generate Teams Of Player Objects
 def generate_team(team):
-  pitcher = Pitcher(get_name(), Pitcher.get_stats())
+  pitcher = Pitcher(Pitcher.get_name(), Pitcher.get_stats())
   team.append(pitcher)
   for i in range(0, 8): #Creates 9 Player Objects With Random Stats Assigns Them To The Specified Team.  
     fielder = Outfielder(Outfielder.get_name(), Outfielder.get_stats())

@@ -11,13 +11,17 @@ Player classes/stats:
     Split Player class into Pitcher/Outfield classes. Outfielders have no need for a pitching stat (implemented).
     Retool team generation to make one pitcher and 8 outfielders (implemented).
 
-Add bases and base runners:
-    Add chance of doubles/triples/home run on hit. Possibly tied to hitting stat?
+Add foul balls (implemented).
+
+Improve offense and defense:
+    Add bases and base runners (implemented).
+    Add chance of doubles/triples/home run on hit (implemented). 
     Add bases loaded/grand slam flourishes. Sound bytes?
     Add double/triple plays for defenders.
     Add stealing bases for base runners.
 
-Figure out if there's a way to exclude non-latin characters from name API call.
+Figure out if there's a way to exclude non-latin characters from name API call (implemented).
+Move team generation into teams.py. 
 Start batting order on next person in list.
 
 Add more teams:
