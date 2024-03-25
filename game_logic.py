@@ -23,13 +23,16 @@ for i in job_hunters:
 
 # Game Logic
 toggle = True
+iterator = 0
 home = the_system
 away = job_hunters
 hitting = ""
 pitching = ""
 bases = []
+bases_loaded = False
 home_batter = 0
 away_batter = 0
+outs = 0
 score = { "THE SYSTEM": 0, "THE JOB HUNTERS": 0}
 
 def play_game():
@@ -54,68 +57,59 @@ def play_game():
 
 
 def play_inning():  # Plays one at bat for both home and away teams.
+    global toggle
+    global iterator
     global hitting
     global pitching
-    global home_batter
-    global away_batter
-    global bases
-    global toggle
-    outs = 0
+    global bases_loaded
+    global outs
 
     print(score, "\n")
     for i in range(0, 2):
         if toggle == True: # If toggle = True away team on offense. If False, home team on offense.
             hitting = away
             pitching = home
-            i = away_batter # Sets i to the value of the last away batter's index, default 0.    
+            iterator = away_batter # Sets i to the value of the last away batter's index, default 0.    
         elif toggle == False:
             hitting = home
             pitching = away
-            i = home_batter # Sets i to the value of the last home batter's index, default 0.
+            iterator = home_batter # Sets i to the value of the last home batter's index, default 0.
 
         print("NOW PITCHING:", str(pitching[0].name.upper()), str(pitching[0].stats), "\n")
         while outs < 3: # While outs < 3, if at bat function returns hit advance bases. Otherwise plus one out.
-            result = at_bat(i)
+            result = at_bat(iterator)
             time.sleep(1)
             if result == "Hit":
-                bases.insert(0, hitting[i].name) # Inserts name of current batter into bases list.
+                bases.insert(0, hitting[iterator].name) # Inserts name of current batter into bases list.
                 manage_runs()
             elif result == "Double":
-                bases.insert(0, hitting[i].name)
-                for j in range(0,1):
+                bases.insert(0, hitting[iterator].name)
+                for j in range(0,1): # Advances player at bat to second base and fills first base with string "empty".
                     bases.insert(0, "empty")
                 manage_runs()
             elif result == "Triple":
-                bases.insert(0, hitting[i].name)
-                for j in range(0,2):
+                bases.insert(0, hitting[iterator].name)
+                for j in range(0,2): # Advances player at bat to third base and fills first and second base with string "empty".
                     bases.insert(0, "empty")
                 manage_runs()
             elif result == "Home Run":
-                bases.insert(0, hitting[i].name)
-                for j in range(0,3):
+                bases.insert(0, hitting[iterator].name)
+                for j in range(0,3): # Advances player at bat home and fills all bases with string "empty".
                     bases.insert(0, "empty")
                 manage_runs()
             else:
                 outs += 1
             print("OUTS:", outs, "\n")
-            i += 1
-            if i >= 9: # Returns to the beginning of the batting order after last batter.
-                i = 0
-        if toggle == True:
-            away_batter = i # Stores the last away batter's index in a variable
-            print("CHANGE SIDES!\n")
-            time.sleep(3)
-        else:
-            home_batter = i # Stores the last home batter's index in a variable
-        bases = [] # Clears bases, outs and current index.
-        outs = 0
-        i = 0
-        toggle = False # Switches toggle to False to change teams. 
-    toggle = True # Switches toggle back to True for next inning.
+            iterator += 1
+            if iterator >= 9: # Returns to the beginning of the batting order after last batter.
+                iterator = 0
+        clear_side() # Clears variables and switches toggle to false to change batting team to home team.
+    toggle = True # Returns toggle to true to change batting team back to away team before next inning.
 
 # At bat function: Simulates one at bat for hitting team
 def at_bat(i):
     global toggle
+    global bases_loaded
     out = False
     hit = False
     strikes = 0
@@ -146,28 +140,34 @@ def at_bat(i):
             # If defense > offense a catch is made for an out. Otherwise results in a hit.
             if defense >= offense:
                 time.sleep(1)
-                print("CAUGHT IN THE OUTFIELD BY", pitching[fielder].name.upper())
+                print("CAUGHT IN THE OUTFIELD BY", pitching[fielder].name.upper() + "\n")
                 out = True
                 time.sleep(0.5)
                 return "Out"
             else:
-                if (offense == 103 and hitting[i].stats["Hitting"] == 1) or (offense == 106 and hitting[i].stats["Hitting"] == 2) or (offense == 109 and hitting[i].stats["Hitting"] == 3) or (offense == 112 and hitting[i].stats["Hitting"] == 4) or (offense == 115 and hitting[i].stats["Hitting"] == 5): 
-                    print("HOME RUN!")
+                # Takes current value of offense/pitch_deducted and compares against threshold to determine number of bases advanced.
+                # If player rolls the max value for their hitting stat before pitcher deduction a home run is scored.
+                if (offense == 103 and hitting[i].stats["Hitting"] == 1) or (offense == 106 and hitting[i].stats["Hitting"] == 2) or (offense == 109 and hitting[i].stats["Hitting"] == 3) or (offense == 112 and hitting[i].stats["Hitting"] == 4) or (offense == 115 and hitting[i].stats["Hitting"] == 5):
+                    if bases_loaded == True:
+                        print("~~~~~ IT'S A GRAND SLAM! ~~~~~\n")
+                        bases_loaded = False
+                    else:
+                        print("HOME RUN!\n")
                     time.sleep(0.5)
                     hit = True
                     return "Home Run"
                 elif pitch_deducted > 95 and pitch_deducted <= 99:
-                    print("DOUBLE!")
+                    print("DOUBLE!\n")
                     time.sleep(0.5)
                     hit = True
                     return "Double"
                 elif pitch_deducted > 100:
-                    print("TRIPLE!")
+                    print("TRIPLE!\n")
                     time.sleep(0.5)
                     hit = True
                     return "Triple"
                 else:
-                    print("HIT")
+                    print("HIT\n")
                     time.sleep(0.5)
                     hit = True
                     return "Hit"
@@ -175,17 +175,19 @@ def at_bat(i):
             strikes += 1
             if strikes >= 3:
                 out = True
-                print("STRIKE 3, YOU'RE OUT!")
+                print("STRIKE 3, YOU'RE OUT!\n")
                 time.sleep(0.5)
                 return "Out"
             else:
                 print("STRIKE", str(strikes) + "!")
 
-def manage_runs():
-    for i in range(0, len(bases)):
-        if len(bases) > 3: # If runner advances home, remove name from end of list.
-            if "empty" in bases[-1:]:
-                bases.pop()
+def manage_runs(): # Removes last index of bases until the length of the bases list is 3 or less and counts runs.
+    global bases_loaded
+
+    for i in range(0, len(bases)): 
+        if len(bases) > 3: 
+            if "empty" in bases[-1:]: # Checks to see if last index of bases is a person or string "empty" if string, no run is scored.
+                bases.pop() 
                 continue
             else:
                 print("A RUN SCORES!")
@@ -194,3 +196,28 @@ def manage_runs():
                 else:
                     score["THE SYSTEM"] += 1
                 bases.pop()
+    if len(bases) == 3 and "empty" not in bases:
+        bases_loaded = True
+        print("THE BASES ARE LOADED\n")
+        time.sleep(0.5)
+
+def clear_side():
+    global iterator
+    global home_batter
+    global away_batter
+    global bases
+    global bases_loaded
+    global toggle
+    global outs
+
+    if toggle == True:
+        away_batter = iterator # Stores the last away batter's index in a variable
+        print("CHANGE SIDES!\n")
+        time.sleep(3)
+    else:
+        home_batter = iterator # Stores the last home batter's index in a variable
+    bases = [] # Clears bases, outs and current index.
+    bases_loaded = False
+    outs = 0
+    iterator = 0
+    toggle = False # Switches toggle to False to change teams. 
