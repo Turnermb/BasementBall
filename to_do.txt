@@ -1,28 +1,28 @@
 TO DO:
-Move game logic into module and get game working (implemented).
-Refactor at bats into one function using top(away) and bottom(home) of inning (implemented).
-Extra innings in case of tie (implemented). 
-Get change sides message to display once per loop instead of twice (implemented).
+Move game logic into module and get game working. (implemented)
+Refactor at bats into one function using top(away) and bottom(home) of inning. (implemented)
+Extra innings in case of tie. (implemented) 
+Get change sides message to display once per loop instead of twice. (implemented)
 
 Player classes/stats: 
-    Hitting increases chance to hit a pitch by 5% per level (implemented). 
-    Pitching reduces a chance to hit a pitch by 3% per level (implemented).
-    Defense increases a chance of catching the ball for an out by 3% per level (implemented).
-    Split Player class into Pitcher/Outfield classes. Outfielders have no need for a pitching stat (implemented).
-    Retool team generation to make one pitcher and 8 outfielders (implemented).
+    Hitting increases chance to hit a pitch by 5% per level. (implemented)
+    Pitching reduces a chance to hit a pitch by 3% per level. (implemented)
+    Defense increases a chance of catching the ball for an out by 3% per level. (implemented)
+    Split Player class into Pitcher/Outfield classes. Outfielders have no need for a pitching stat. (implemented)
+    Retool team generation to make one pitcher and 8 outfielders. (implemented)
 
-Add foul balls (implemented).
+Add foul balls. (implemented)
 
 Improve offense and defense:
-    Add bases and base runners (implemented).
-    Add chance of doubles/triples/home run on hit (implemented). 
-    Add bases loaded/grand slam flourishes. Sound bytes?
+    Add bases and base runners. (implemented).
+    Add chance of doubles/triples/home run on hit. (implemented).
+    Add bases loaded/grand slam flourishes. (implemented)
     Add double/triple plays for defenders.
     Add stealing bases for base runners.
 
-Figure out if there's a way to exclude non-latin characters from name API call (implemented).
+Figure out if there's a way to exclude non-latin characters from name API call. (implemented)
 Move team generation into teams.py. 
-Start batting order on next person in list.
+Start batting order on next person in list. (implemented but I have no idea how)
 
 Add more teams:
     Home Stadiums.
