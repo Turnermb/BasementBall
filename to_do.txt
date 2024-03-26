@@ -21,11 +21,12 @@ Improve offense and defense:
     Add stealing bases for base runners.
 
 Figure out if there's a way to exclude non-latin characters from name API call. (implemented)
-Move team generation into teams.py. 
+Move team generation into teams.py. (implemented)
 Start batting order on next person in list. (implemented but I have no idea how)
 
-Add more teams:
-    Home Stadiums.
+Expand scope:
+    Add more teams.
+    Home Stadiums. (implemented)
     Divisions.
     Season/Post Season.
     
