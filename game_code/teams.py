@@ -3,25 +3,14 @@ from random import randrange as random
 import json
 
 # Current Basement Ball teams.
-'''
-teams_tuple = (
-  {"Name": "The System", "Score": 0, "Home Field": "Billionaire Row", "Players": []}, 
-  {"Name": "The Job Hunters","Score": 0, "Home Field": "Cubicle Park", "Players": []}
-)
-'''
-the_system = {"Name": "The System", "Score": 0, "Home Field": "Billionaire Row", "Players": []},
-job_hunters = {"Name": "The Job Hunters","Score": 0, "Home Field": "Cubicle Park", "Players": []}
 
-# Team class. Currently unused.
-class Team:
-  def __init__(self, name, score, home_field, players):
-    self.name = name
-    self.name = score
-    self.home_field = home_field
-    self.players = players
+teams = (
+  {"Name": "The System", "Score": 0, "Wins": 0, "Losses": 0, "Hated Rival": "The Job Hunters", "Home Field": "Billionaire Row", "Players": []}, 
+  {"Name": "The Job Hunters","Score": 0, "Wins": 0, "Losses": 0, "Hated Rival": "The System", "Home Field": "Cubicle Park", "Players": []}
+)
 
 # Player classes.
-class Player(Team):
+class Player():
   def __init__(self, name, stats, position):
     self.name = name
     self.stats = stats
@@ -84,5 +73,5 @@ def generate_team(team):
     fielder = Outfielder(Outfielder.get_name(), Outfielder.get_stats())
     team["Players"].append(fielder)
 
-generate_team(the_system)
-generate_team(job_hunters)
+generate_team(teams[0])
+generate_team(teams[1])
