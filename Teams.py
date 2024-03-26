@@ -1,10 +1,15 @@
 import requests
 from random import randrange as random
 import json
-import time
 
 # Current Basement Ball teams.
-the_system = {"Name": "The System", "Score": 0, "Home Field": "Billionaire Row", "Players": []}
+'''
+teams_tuple = (
+  {"Name": "The System", "Score": 0, "Home Field": "Billionaire Row", "Players": []}, 
+  {"Name": "The Job Hunters","Score": 0, "Home Field": "Cubicle Park", "Players": []}
+)
+'''
+the_system = {"Name": "The System", "Score": 0, "Home Field": "Billionaire Row", "Players": []},
 job_hunters = {"Name": "The Job Hunters","Score": 0, "Home Field": "Cubicle Park", "Players": []}
 
 # Team class. Currently unused.
