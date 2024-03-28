@@ -1,12 +1,12 @@
 from random import randrange as random
 import time
-from teams import the_system, job_hunters
+from teams import teams
 from sys import exit
 
 # Game Logic
 toggle = True
 iterator = 0
-current_field = "Billionaire Row"
+current_field = "Cubicle Park"
 home = ""
 away = ""
 hitting = ""
@@ -18,7 +18,7 @@ away_batter = 0
 outs = 0
 
         
-def play_game():
+def play_game(team1, team2):
     # Variables:
     inning = 1
 
@@ -39,6 +39,7 @@ def play_game():
 
     # Introduces the players on each team.
     def introduce_teams(home, away):
+        print("BASEMENT BALL IS COMING TO YOU LIVE FROM:", current_field.upper(), "\n")
         print("INTRODUCING THE HOME TEAM:", home["Name"].upper(),"\n")
         for i in home["Players"]:
             print(i.name.upper())
@@ -50,7 +51,7 @@ def play_game():
             time.sleep(.5)
 
     # Gameplay logic:
-    home_field(the_system, job_hunters)
+    home_field(teams[0], teams[1])
     introduce_teams(home, away)
     print("\nPLAY BALL!\n")
     for i in range(0, 9):
@@ -64,7 +65,7 @@ def play_game():
             play_inning()
             inning += 1
     print("THAT'S THE GAME!")
-    print(home["Name"] + ":",home["Score"], away["Name"] + ":", away["Score"])
+    print(home["Name"].upper() + ":",home["Score"], away["Name"].upper() + ":", away["Score"])
     home["Score"] = 0
     away["Score"] = 0
 
@@ -122,7 +123,7 @@ def play_inning():  # Plays one at bat for both home and away teams.
 
 
     # Gameplay logic:
-    print(home["Score"], away["Score"], "\n")
+    print(home["Name"] + ":",home["Score"], away["Name"] + ":", away["Score"], "\n")
     for i in range(0, 2):
         if toggle == True: # If toggle = True away team on offense. If False, home team on offense.
             hitting = away

@@ -1,22 +1,24 @@
 import requests
 from random import randrange as random
 import json
-import time
 
 # Current Basement Ball teams.
-the_system = {"Name": "The System", "Score": 0, "Home Field": "Billionaire Row", "Players": []}
-job_hunters = {"Name": "The Job Hunters","Score": 0, "Home Field": "Cubicle Park", "Players": []}
 
-# Team class. Currently unused.
-class Team:
-  def __init__(self, name, score, home_field, players):
-    self.name = name
-    self.name = score
-    self.home_field = home_field
-    self.players = players
+teams = (
+  {"Name": "The System", "Score": 0, "Wins": 0, "Losses": 0, "Division": "", "Hated Rival": "The Job Hunters", "Home Field": "Billionaire Row", "Players": []}, 
+  {"Name": "The Job Hunters","Score": 0, "Wins": 0, "Losses": 0, "Division": "", "Hated Rival": "The System", "Home Field": "Cubicle Park", "Players": []},
+  {"Name": "The Amarillo Chanclas","Score": 0, "Wins": 0, "Losses": 0, "Division": "South", "Hated Rival": "The Nantucket Shoobies", "Home Field": "The Shoe", "Players": []},
+  {"Name": "The Tallahassee Whippersnappers","Score": 0, "Wins": 0, "Losses": 0, "Division": "South", "Hated Rival": "The Red River Ladybugs", "Home Field": "Werther's Original Park", "Players": []},
+  {"Name": "The Roanoke Underachievers","Score": 0, "Wins": 0, "Losses": 0, "Division": "East", "Hated Rival": "The Cheyenne Union", "Home Field": "The Substandard Dome", "Players": []},
+  {"Name": "The Nantucket Shoobies","Score": 0, "Wins": 0, "Losses": 0, "Division": "East", "Hated Rival": "The Amarillo Chanclas", "Home Field": "The Sound", "Players": []},
+  {"Name": "The Kalamazoo Troublemakers","Score": 0, "Wins": 0, "Losses": 0, "Division": "North", "Hated Rival": "The Pasadena Preachers", "Home Field": "The Schoolyard", "Players": []},
+  {"Name": "The Red River Ladybugs","Score": 0, "Wins": 0, "Losses": 0, "Division": "North", "Hated Rival": "The Tallahassee Whippersnappers", "Home Field": "Red River Field", "Players": []},
+  {"Name": "The Pasadena Preachers","Score": 0, "Wins": 0, "Losses": 0, "Division": "West", "Hated Rival": "The Kalamazoo Troublemakers", "Home Field": "The Pulpit", "Players": []},
+  {"Name": "The Cheyenne Union","Score": 0, "Wins": 0, "Losses": 0, "Division": "West", "Hated Rival": "The Roanoke Underachievers", "Home Field": "Union Station", "Players": []}
+)
 
 # Player classes.
-class Player(Team):
+class Player():
   def __init__(self, name, stats, position):
     self.name = name
     self.stats = stats
@@ -79,5 +81,5 @@ def generate_team(team):
     fielder = Outfielder(Outfielder.get_name(), Outfielder.get_stats())
     team["Players"].append(fielder)
 
-generate_team(the_system)
-generate_team(job_hunters)
+generate_team(teams[0])
+generate_team(teams[1])

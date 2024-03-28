@@ -25,14 +25,16 @@ Move team generation into teams.py. (implemented)
 Start batting order on next person in list. (implemented but I have no idea how)
 
 Expand scope:
-    Add more teams.
+    Add way to select teams out of teams_tuple to play game. (implemented)
+    Add more teams. (implemented)
     Home Stadiums. (implemented)
-    Divisions.
+    Divisions. (implemented)
     Season/Post Season.
     
 Add bigger teams.
 
 Website?:
+    REST
     Front end. React? Angular?
     Accounts with authentication.
     favorite teams.
