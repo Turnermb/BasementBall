@@ -6,7 +6,7 @@ from sys import exit
 # Game Logic
 toggle = True
 iterator = 0
-current_field = "Billionaire Row"
+current_field = "Cubicle Park"
 home = ""
 away = ""
 hitting = ""
@@ -18,7 +18,7 @@ away_batter = 0
 outs = 0
 
         
-def play_game():
+def play_game(team1, team2):
     # Variables:
     inning = 1
 
@@ -65,7 +65,7 @@ def play_game():
             play_inning()
             inning += 1
     print("THAT'S THE GAME!")
-    print(home["Name"] + ":",home["Score"], away["Name"] + ":", away["Score"])
+    print(home["Name"].upper() + ":",home["Score"], away["Name"].upper() + ":", away["Score"])
     home["Score"] = 0
     away["Score"] = 0
 
