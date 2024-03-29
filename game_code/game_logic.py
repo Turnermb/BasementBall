@@ -1,6 +1,7 @@
-from random import randrange as random
+from random import randrange as random, sample
+from itertools import combinations
 import time
-from teams import teams
+from teams import teams, generate_team
 from sys import exit
 
 # Game Logic
@@ -17,6 +18,28 @@ home_batter = 0
 away_batter = 0
 outs = 0
 
+# Plays out an entire season of Basement Ball
+def play_season():
+    # Variables:
+    global current_field
+
+    # Gameplay functions:
+    def determine_schedule():
+        # Each team plays every other team twice at home and twice away.
+        com_result = list(combinations(teams, 2))
+        result = list(sample(com_result, len(com_result)))
+
+        return result
+
+
+    # Gameplay logic:
+    schedule = determine_schedule()
+    schedule_list = list(schedule)
+    for i in range(0, len(schedule_list)):
+        generate_team(schedule_list[i][0])
+        generate_team(schedule_list[i][1])
+        current_field = schedule_list[i][0]["Home Field"]
+        play_game(schedule_list[i][0], schedule_list[i][1])
         
 def play_game(team1, team2):
     # Variables:
@@ -35,6 +58,7 @@ def play_game(team1, team2):
             home = team2
             away = team1
         else:
+            print(team1, team2, current_field)
             exit("NOT VALID TEAMS")
 
     # Introduces the players on each team.
@@ -51,7 +75,7 @@ def play_game(team1, team2):
             time.sleep(.5)
 
     # Gameplay logic:
-    home_field(teams[0], teams[1])
+    home_field(team1, team2)
     introduce_teams(home, away)
     print("\nPLAY BALL!\n")
     for i in range(0, 9):
@@ -123,7 +147,7 @@ def play_inning():  # Plays one at bat for both home and away teams.
 
 
     # Gameplay logic:
-    print(home["Name"] + ":",home["Score"], away["Name"] + ":", away["Score"], "\n")
+    print(home["Name"].upper() + ":",home["Score"], away["Name"].upper() + ":", away["Score"], "\n")
     for i in range(0, 2):
         if toggle == True: # If toggle = True away team on offense. If False, home team on offense.
             hitting = away

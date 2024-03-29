@@ -29,7 +29,7 @@ Expand scope:
     Add more teams. (implemented)
     Home Stadiums. (implemented)
     Divisions. (implemented)
-    Season/Post Season.
+    Season/Post Season. (Undergoing further testing)
     
 Add bigger teams.
 

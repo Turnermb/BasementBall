@@ -5,8 +5,8 @@ import json
 # Current Basement Ball teams.
 
 teams = (
-  {"Name": "The System", "Score": 0, "Wins": 0, "Losses": 0, "Division": "", "Hated Rival": "The Job Hunters", "Home Field": "Billionaire Row", "Players": []}, 
-  {"Name": "The Job Hunters","Score": 0, "Wins": 0, "Losses": 0, "Division": "", "Hated Rival": "The System", "Home Field": "Cubicle Park", "Players": []},
+  #{"Name": "The System", "Score": 0, "Wins": 0, "Losses": 0, "Division": "", "Hated Rival": "The Job Hunters", "Home Field": "Billionaire Row", "Players": []}, 
+  #{"Name": "The Job Hunters","Score": 0, "Wins": 0, "Losses": 0, "Division": "", "Hated Rival": "The System", "Home Field": "Cubicle Park", "Players": []},
   {"Name": "The Amarillo Chanclas","Score": 0, "Wins": 0, "Losses": 0, "Division": "South", "Hated Rival": "The Nantucket Shoobies", "Home Field": "The Shoe", "Players": []},
   {"Name": "The Tallahassee Whippersnappers","Score": 0, "Wins": 0, "Losses": 0, "Division": "South", "Hated Rival": "The Red River Ladybugs", "Home Field": "Werther's Original Park", "Players": []},
   {"Name": "The Roanoke Underachievers","Score": 0, "Wins": 0, "Losses": 0, "Division": "East", "Hated Rival": "The Cheyenne Union", "Home Field": "The Substandard Dome", "Players": []},
@@ -80,6 +80,3 @@ def generate_team(team):
   for i in range(0, 8): #Creates 9 Player Objects With Random Stats Assigns Them To The Specified Team.  
     fielder = Outfielder(Outfielder.get_name(), Outfielder.get_stats())
     team["Players"].append(fielder)
-
-generate_team(teams[0])
-generate_team(teams[1])
